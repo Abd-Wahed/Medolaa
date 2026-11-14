@@ -23,3 +23,28 @@ export const saveMedication = async (newMed) => {
     throw error;
   }
 };
+export const updateMedication = async (updatedMed) => {
+  try {
+    const existing = await getMedications();
+    const updatedList = existing.map((item) =>
+      item.id === updatedMed.id ? updatedMed : item,
+    );
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedList));
+    return updatedList;
+  } catch (error) {
+    console.error("Failed to update medication:", error);
+    throw error;
+  }
+};
+
+export const deleteMedication = async (id) => {
+  try {
+    const existing = await getMedications();
+    const filteredList = existing.filter((item) => item.id !== id);
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(filteredList));
+    return filteredList;
+  } catch (error) {
+    console.error("Failed to delete medication:", error);
+    throw error;
+  }
+};
