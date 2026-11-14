@@ -119,7 +119,7 @@ export default function AddMedication({ initialData, onSave, onCancel }) {
                 frequency === num && styles.freqTextActive,
               ]}
             >
-              দিনে {num} বার
+              Daily {num} Times
             </Text>
           </TouchableOpacity>
         ))}
