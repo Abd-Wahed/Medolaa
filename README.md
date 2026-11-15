@@ -1,56 +1,34 @@
-# Welcome to your Expo app 👋
+# Medolaa — Medications Feature
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native (Expo) vertical slice for tracking daily medications, managing schedules, and triggering exact local alarm reminders with snooze support—built completely offline using local device persistence.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **Medication List:** Displays active medications with dosage, daily frequency, and calculated next reminder time, explicitly handling **Loading**, **Empty**, and **Populated** states.
+- **Full CRUD Support:** Create, view details, edit, and delete medications with automatic rescheduling or cancellation of associated notifications.
+- **Form Validation:** Inline validation preventing empty or incomplete medication entries from saving.
+- **Local Persistence:** Uses `AsyncStorage` so saved medications and schedules persist across app restarts and force-closes.
+- **Exact Local Alarms & Snooze:** High-priority daily notifications with custom alarm sound (`alarm.mp3`), vibration, in-context permission handling, and a `Snooze (10m)` action button.
 
-   ```bash
-   npm install
-   ```
+## Tech Stack & APIs Used
 
-2. Start the app
+- **Framework:** React Native & Expo (`expo-router`)
+- **Notifications & Alarms:** `expo-notifications`, `expo-device`
+- **Local Storage:** `@react-native-async-storage/async-storage`
+- **Date & Time Picker:** `@react-native-community/datetimepicker`
 
-   ```bash
-   npx expo start
-   ```
+## Project Structure
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```text
+src/
+├── app/
+│   ├── _layout.tsx            # Root navigation stack configuration
+│   └── index.tsx              # Main controller managing state, CRUD, and foreground alerts
+├── screens/
+│   ├── MedicationList.js      # List screen (Loading, Empty, Has-items states)
+│   ├── AddMedication.js       # Add/Edit form with inline validation
+│   └── MedicationDetails.js   # Medication details with Edit & Delete actions
+├── storage/
+│   └── medicationStorage.js   # AsyncStorage CRUD helper functions
+└── utils/
+    └── notificationHelper.js  # Alarm channel setup, scheduling, snooze, and cancellation
